@@ -3,6 +3,9 @@
 @use 'shows';
 @use 'plans';
 @use 'available-devices';
+@use 'faq';
+@use 'footer';
+@use 'header';
 
 @font-face {
     font-family: Avenir;
@@ -20,7 +23,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
     font-family: Avenir, sans-serif;
 }
 
@@ -30,7 +32,7 @@ body {
 }
 
 @mixin text($fontSize: 16px) {
-    font-size: 16px;
+    font-size: 13px;
     line-height: $fontSize + 10px;
     color: variaveis.$corTextoPrincipal;
 }
@@ -42,14 +44,26 @@ body {
 
 .text--big {
     @include text(18px);
+
+    @media (max-width: 768px) {
+        font-size: 15px;
+    }
 }
 
 .text {
     @include text;
+
+    @media (max-width: 768px) {
+        font-size: 14px;
+    }
 }
 
 .text--small {
     @include text(12px);
+
+    @media (max-width: 768px) {
+        font-size: 11px;
+    }
 }
 
 .link-text {
@@ -68,19 +82,50 @@ body {
 
 .title--small {
     @include title(28px);
+
+    @media (max-width: 768px) {
+        font-size: 22px;
+    }
 }
 
 .button {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 45px;
     font-size: 18px;
     color: variaveis.$corTextoSecundario;
-    background-color: #6421ff;
+    background-color: variaveis.$corDeFundoBotaoPrimario;
     text-transform: uppercase;
     border-radius: 4px;
-    margin-top: 2vw;
-    margin-bottom: 8px;
+    text-decoration: none;
+    padding: 8px 14px;
+    letter-spacing: 1px;
+    border: 1px solid variaveis.$corDeFundoBotaoPrimario;
+
+    &:hover {
+        background-color: lighten(variaveis.$corDeFundoBotaoPrimario, 3%);
+    }
+
+    &--secondary {
+        background-color: variaveis.$corDeFundoBotaoSecundario;
+        border-color: variaveis.$corDeFundoBotaoSecundario;
+
+        &:hover {
+            background-color: lighten(variaveis.$corDeFundoBotaoSecundario, 3%);
+        }
+    }
+
+    &--dark {
+        background-color: rgba(variaveis.$corDefundoBotaoDark, 0.8);
+        border-color: variaveis.$corTextoSecundario;
+
+        &:hover {
+            background-color: variaveis.$corTextoSecundario;
+            color: variaveis.$corDeFundo;
+        }
+    }
 }
 
 .image-text-section {
@@ -88,6 +133,10 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
+
+    @media (max-width: 768px) {
+        display: block;
+    }
     
     img {
         max-width: 100%;
@@ -118,6 +167,12 @@ body {
             flex-direction: column;
             justify-content: center;
             width: calc(50% - 5.6vw);
+
+            @media (max-width: 768px) {
+                position: relative;
+                left: 0;
+                width: 100%;
+            }
         }
     }
 }
